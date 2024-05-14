@@ -11,7 +11,9 @@ WORKDIR /app
 COPY . .
 RUN rm -rf /app/vendor
 RUN rm -rf /app/composer.lock
-RUN composer install
+RUN composer self-update --2
+RUN composer clear-cache
+RUN composer install  --verbose
 RUN composer require laravel/octane spiral/roadrunner
 COPY .env.example .env
 RUN mkdir -p /app/storage/logs
